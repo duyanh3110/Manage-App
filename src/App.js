@@ -52,6 +52,29 @@ class App extends Component {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
+  onUpdateStatus = (id) => {
+    let { tasks } = this.state;
+    let index = this.findIndex(id);
+    if (index !== -1){
+      tasks[index].status = !tasks[index].status;
+      this.setState({
+        tasks: tasks
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  };
+
+  findIndex = (id) => {
+    let { tasks } = this.state;
+    let result = -1;
+    tasks.forEach((task, index) => {
+      if (task.id === id) {
+        result = index;
+      }
+    });
+    return result;
+  }
+
   render() {
     let { tasks, isDisplayForm } = this.state;
     var elmTaskForm = isDisplayForm
@@ -80,7 +103,10 @@ class App extends Component {
             {/* Search and Sort */}
             <Control />
             {/* List */}
-            <TaskList tasks={ tasks } />
+            <TaskList
+              tasks={ tasks }
+              onUpdateStatus={ this.onUpdateStatus }
+            />
           </div>
         </div>
       </div>
