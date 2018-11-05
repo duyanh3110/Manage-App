@@ -22,27 +22,6 @@ class App extends Component {
     }
   };
 
-  // onGenerateData = () => {
-  //   let tasks = [
-  //     {
-  //       id: this.generateId(),
-  //       name: 'Study Angular',
-  //       status: true
-  //     },
-  //     {
-  //       id: this.generateId(),
-  //       name: 'Study React',
-  //       status: true
-  //     },
-  //     {
-  //       id: this.generateId(),
-  //       name: 'Study VueJs',
-  //       status: false
-  //     }
-  //   ];
-  //   localStorage.setItem('tasks', JSON.stringify(tasks));
-  // };
-
   onToggleForm = () => {
     this.setState({
       isDisplayForm: !this.state.isDisplayForm
@@ -71,7 +50,6 @@ class App extends Component {
       tasks: tasks
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    console.log(localStorage.getItem('tasks'));
   };
 
   render() {
@@ -99,13 +77,6 @@ class App extends Component {
               <i className="fa fa-plus mr-5" />
               Add Work
             </button>
-            {/*<button*/}
-              {/*type="button"*/}
-              {/*className="btn btn-danger ml-5"*/}
-              {/*onClick={ this.onGenerateData() }*/}
-            {/*>*/}
-              {/*Generate Date*/}
-            {/*</button>*/}
             {/* Search and Sort */}
             <Control />
             {/* List */}
