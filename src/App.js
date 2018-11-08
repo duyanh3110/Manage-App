@@ -15,9 +15,11 @@ class App extends Component {
         name: '',
         status: -1
       },
-      keyword: ''
-    }
-  }
+      keyword: '',
+      sortBy: 'name',
+      sortValue: 1,
+    };
+  };
 
   componentWillMount() {
     if (localStorage && localStorage.getItem("tasks")) {
@@ -141,8 +143,15 @@ class App extends Component {
     });
   };
 
+  onSort = (sortBy, sortValue) => {
+    this.setState({
+      sortBy: sortBy,
+      sortValue: sortValue
+    })
+  };
+
   render() {
-    let { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state;
+    let { tasks, isDisplayForm, taskEditing, filter, keyword, sortBy, sortValue } = this.state;
 
     // Filter
     if(filter) {
@@ -164,6 +173,21 @@ class App extends Component {
     if(keyword) {
       tasks = tasks.filter((task) => {
         return task.name.toLowerCase().indexOf(keyword) !== -1;
+      });
+    }
+
+    // Sort
+    if(sortBy === 'name') {
+      tasks.sort((a,b) => {
+        if(a.name > b.name) return sortValue;
+        else if(a.name < b.name) return -sortValue;
+        else return 0;
+      });
+    } else {
+      tasks.sort((a,b) => {
+        if(a.status > b.status) return -sortValue;
+        else if(a.status < b.status) return sortValue;
+        else return 0;
       });
     }
 
@@ -195,6 +219,9 @@ class App extends Component {
             {/* TaskSearchControl and Sort */}
             <TaskControl
               onSearch={ this.onSearch }
+              onSort={ this.onSort }
+              sortBy={ sortBy }
+              sortValue={ sortValue }
             />
             {/* List */}
             <TaskList

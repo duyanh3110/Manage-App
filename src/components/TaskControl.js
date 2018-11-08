@@ -11,7 +11,11 @@ class TaskControl extends Component {
           onSearch={ this.props.onSearch }
         />
         {/* Sort */}
-        <TaskSortControl />
+        <TaskSortControl
+          onSort={ this.props.onSort }
+          sortBy={ this.props.sortBy }
+          sortValue={ this.props.sortValue }
+        />
       </div>
     );
   }
