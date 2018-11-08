@@ -2,8 +2,30 @@ import React, { Component } from 'react';
 import TaskItem from './TaskItem';
 
 class TaskList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterName: '',
+      filterStatus: -1 // -1: all, 1: active, 0: disable
+    };
+  };
+
+  onChange = (event) => {
+    let target = event.target;
+    let name = target.name;
+    let value = target.value;
+    this.props.onFilter(
+      name === 'filterName' ? value : this.state.filterName,
+      name === 'filterStatus' ? value : this.state.filterStatus
+    );
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
     let { tasks } = this.props;
+    let { filterName, filterStatus } = this.state;
     let elmTasks = tasks.map((task, index) => {
       return <TaskItem
         key={ task.id }
@@ -34,12 +56,16 @@ class TaskList extends Component {
                   type="text"
                   className="form-control"
                   name="filterName"
+                  value={ filterName }
+                  onChange={ this.onChange }
                 />
               </td>
               <td>
                 <select
                   name="filterStatus"
                   className="form-control"
+                  value={ filterStatus }
+                  onChange={ this.onChange }
                 >
                   <option value={-1}>All</option>
                   <option value={0}>Disable</option>
