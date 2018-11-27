@@ -41,7 +41,7 @@ class TaskSearchControl extends Component {
               onClick={ this.onSearch }
             >
               <i className="fa fa-search mr-5"></i>
-              Search
+              Search Task
             </button>
           </span>
         </div>
