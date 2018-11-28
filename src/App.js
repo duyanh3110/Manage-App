@@ -207,7 +207,7 @@ class App extends Component {
           : '';
     return (
       <div className="container">
-        <h1 className="text-center mt-15">Manage Work</h1>
+        <h1 className="text-center mt-15">Manage Work Application</h1>
         <div className="row">
           <div className={ isDisplayForm === true ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : ""}>
             {/* Form */}
